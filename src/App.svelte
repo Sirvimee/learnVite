@@ -1,4 +1,5 @@
 <script>
+  import ItemList from "./lib/ItemList.svelte";
   let message = "Hello Svelte";
   let items = [
     { text: "Piim", isDone: false },
@@ -25,35 +26,14 @@
   }
 </script>
 
-<input type="text" bind:value={message} on:keydown={keydown} />
-<button on:click={add}>Add</button>
+<div class="container mx-auto mt-10 text-center">
+  <input type="text" class="input input-bordered input-accent w-full max-w-xs" bind:value={message} on:keydown={keydown} />
+  <button on:click={add} class="btn btn-md btn-primary">Add</button>
+  <br><br>
+  <ItemList title="All items" bind:items={items}></ItemList>
+  <br>
+  <ItemList title="Done items" bind:items={doneItems}></ItemList>
+  <br>
+  <ItemList title="Not Done items" bind:items={notDoneItems}></ItemList>
+</div>
 
-<h1>All items</h1>
-<ul>
-  {#each items as item}
-    <li>
-      {item.text}
-      <input type="checkbox" bind:checked={item.isDone} />
-    </li>
-  {/each}
-</ul>
-
-<h1>Done items</h1>
-<ul>
-  {#each doneItems as item}
-    <li>
-      {item.text}
-      <input type="checkbox" bind:checked={item.isDone} />
-    </li>
-  {/each}
-</ul>
-
-<h1>Not done items</h1>
-<ul>
-  {#each notDoneItems as item}
-    <li>
-      {item.text}
-      <input type="checkbox" bind:checked={item.isDone} />
-    </li>
-  {/each}
-</ul>
